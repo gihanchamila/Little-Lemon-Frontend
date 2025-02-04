@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import Logo from '../public/Logo.svg'
 
 const navigationLinks = [
   {
@@ -54,6 +55,9 @@ const NavigationItems = () => {
 const Navigation = () => {
   return (
     <nav role='navigation'>
+      <figure>
+        <img src={Logo} alt="Logo" />
+      </figure>
       <NavigationItems />
     </nav>
   )
