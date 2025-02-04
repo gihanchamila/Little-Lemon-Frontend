@@ -1,8 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-"Home", "About", "Menu", "Reservations", "order online", "Login"
-
 const navigationLinks = [
   {
     id: 1,
@@ -53,10 +51,9 @@ const NavigationItems = () => {
   );
 };
 
-
 const Navigation = () => {
   return (
-    <nav>
+    <nav role='navigation'>
       <NavigationItems />
     </nav>
   )
