@@ -1,3 +1,7 @@
+import Footer from "./Footer"
+import Header from "./Header"
+import MainScreen from "./MainScreen"
+import Navigation from "./Navigation"
 
 
 function App() {
@@ -5,10 +9,10 @@ function App() {
 
   return (
     <>
-      <header />
-      <nav />
-      <main />
-      <footer />
+      <Header />
+      <Navigation />
+      <MainScreen />
+      <Footer />
     </>
   )
 }
