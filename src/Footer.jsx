@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { LogoImage } from './Navigation'
+import LogoFooter from '../public/LogoFooter.svg'
 
 const doormatLinks = [
   {
@@ -125,7 +126,7 @@ const SocialItems = () => {
 const Footer = () => {
   return (
     <footer>
-      <LogoImage />
+      <LogoImage logo={LogoFooter} />
       <DoormatItems />
       <ContactItems />
       <SocialItems />
