@@ -52,12 +52,18 @@ const NavigationItems = () => {
   );
 };
 
+export const LogoImage = () => {
+  return (
+    <figure>
+      <img src={Logo} alt="Company Logo" />
+    </figure>
+  );
+};
+
 const Navigation = () => {
   return (
     <nav role='navigation'>
-      <figure>
-        <img src={Logo} alt="Logo" />
-      </figure>
+      <LogoImage />
       <NavigationItems />
     </nav>
   )
