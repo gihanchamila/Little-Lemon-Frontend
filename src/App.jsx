@@ -5,6 +5,10 @@ function App() {
 
   return (
     <>
+      <header />
+      <nav />
+      <main />
+      <footer />
     </>
   )
 }
