@@ -41,23 +41,23 @@ const navigationLinks = [
   }
 ];
 
-const NavigationItems =() => {
+const NavigationItems = () => {
+  return (
+    <ul>
+      {navigationLinks.map((link) => (
+        <li key={link.id}>
+          <NavLink to={link.link}>{link.name}</NavLink>
+        </li>
+      ))}
+    </ul>
+  );
+};
 
-    return(
-
-      <li>
-        <NavLink to="/" exact activeClassName="active">Home</NavLink>
-      </li>
-
-    )
-}
 
 const Navigation = () => {
   return (
     <nav>
-        <ul>
-
-        </ul>
+      <NavigationItems />
     </nav>
   )
 }
