@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import Logo from '../public/Logo.svg'
+import Logo from './assets/Logo.svg'
 
 const navigationLinks = [
   {

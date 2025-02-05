@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { LogoImage } from './Navigation'
-import LogoFooter from '../public/LogoFooter.svg'
+import LogoFooter from './assets/LogoFooter.svg'
 
 const doormatLinks = [
   {

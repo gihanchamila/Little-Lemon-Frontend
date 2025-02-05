@@ -2,7 +2,8 @@ import React from 'react'
 
 const MainScreen = () => {
   return (
-    <main></main>
+    <main>
+    </main>
   )
 }
 
