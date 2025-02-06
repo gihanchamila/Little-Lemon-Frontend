@@ -1,7 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
 @import "tailwindcss";
+
 
 * {
     margin: 0;
     padding: 0;
 }
+
+@theme {
+    --font-markazi: 'Markazi Text', serif;
+    --font-karla: 'Karla', sans-serif;
+
+    --text-tiny: 1.25rem; /* 16px */
+    --text-sm: 1.5rem; /* 18px */
+    --text-md: 1.667rem; /* 20px */
+    --text-lg: 3.333rem; /* 40px */
+    --text-xl: 4.833remrem;    /* 58px */
+    --text-2xl: 5.333rem; /* 64px */
+
+    --color-primary-1: #495E57; /* green */
+    --color-primary-2: #F4CE14; /* yellow */
+
+    --color-secondary-1: #EE9972; /* orange */
+    --color-secondary-2: #FBDABB; /* pink */
+    --color-secondary-3: #EDEFEE; /* light grey */
+    --color-secondary-4: #333333; /* dark grey */
+}
+
+.gridLayout {
+    @apply mx-12 grid grid-cols-12 md:grid-cols-4 lg:grid-cols-12 gap-5;
+}
+
+
 
