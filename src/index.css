@@ -12,24 +12,36 @@
     --font-markazi: 'Markazi Text', serif;
     --font-karla: 'Karla', sans-serif;
 
-    --text-tiny: 1.25rem; /* 16px */
-    --text-sm: 1.5rem; /* 18px */
-    --text-md: 1.667rem; /* 20px */
-    --text-lg: 3.333rem; /* 40px */
-    --text-xl: 4.833remrem;    /* 58px */
-    --text-2xl: 5.333rem; /* 64px */
+    --text-tiny: 1rem; /* 16px */
+    --text-sm: 1.12rem; /* 18px */
+    --text-md: 1.25rem; /* 20px */
+    --text-lg: 2.5rem; /* 40px */
+    --text-xl: 3.5rem;    /* 54px */
+    --text-2xl: 4rem; /* 64px */
 
     --color-primary-1: #495E57; /* green */
     --color-primary-2: #F4CE14; /* yellow */
 
     --color-secondary-1: #EE9972; /* orange */
     --color-secondary-2: #FBDABB; /* pink */
-    --color-secondary-3: #EDEFEE; /* light grey */
+    --color-secondary-3: #EDEFED; /* light grey */
     --color-secondary-4: #333333; /* dark grey */
 }
 
 .gridLayout {
-    @apply mx-12 grid grid-cols-12 md:grid-cols-4 lg:grid-cols-12 gap-5;
+    @apply grid grid-cols-12 md:grid-cols-4 lg:grid-cols-12 gap-5 px-12 py-12;
+}
+
+.button {
+    @apply text-sm font-extrabold px-4 py-4 rounded-2xl;
+}
+
+.primaryButton {
+    @apply bg-primary-2 text-secondary-4 ;
+}
+
+.secondaryButton {
+    @apply bg-primary-1 text-primary-2;
 }
 
 
