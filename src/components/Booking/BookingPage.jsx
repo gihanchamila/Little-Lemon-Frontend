@@ -21,10 +21,6 @@ const BookingPage = () => {
     dispatch({ type: 'UPDATE_TIMES', payload: times });
   }, [])
 
-  const  submitForm = (formData) => {
-    submitAPI(formData)
-
-  }
 
   return (
     <BookingForm availableTimes={availableTimes} dispatch={dispatch}/>
