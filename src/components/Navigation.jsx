@@ -1,70 +1,102 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, NavLink } from 'react-router-dom'
+import { Menu, X } from 'lucide-react';
 import {Logo} from '../assets'
 
 const navigationLinks = [
   {
     id: 1,
     name: "Home",
-    link: "/"
+    link: "#home"
   },
 
   {
     id: 2,
     name: "About",
-    link: "/about"
+    link: "#about"
   },
 
   {
     id: 3,
     name: "Menu",
-    link: "/menu"
+    link: "#menu"
   },
 
   {
     id: 4,
     name: "Reservations",
-    link: "/reservations"
+    link: "#reservations"
   },
 
   {
     id: 5,
     name: "Order Online",
-    link: "/order-online"
+    link: "#order-online"
   },
 
   {
     id: 6,
     name: "Login",
-    link: "/login"
+    link: "#login"
   }
 ];
 
 const NavigationItems = () => {
   return (
-    <ul className='col-start-5 col-end-12 col-span-9 flex justify-between  '>
+    <ul className='lg:col-start-5 lg:col-end-12 lg:-span-9 lg:flex-row lg:justify-between lg:mt-0 lg:items-center lg:space-y-0 lg:h-fit sm:flex sm:flex-col sm:space-y-8 sm:mt-12 sm:h-dvh'>
       {navigationLinks.map((link) => (
         <li key={link.id}>
-          <NavLink to={link.link} className={"text-tiny font-karla font-bold text-secondary-4 uppercase"}>{link.name}</NavLink>
+          <a href={link.link} className={"navigationList"}>{link.name}</a>
         </li>
       ))}
     </ul>
   );
 };
 
-export const LogoImage = ({logo}) => {
+export const LogoImage = ({ logo, className }) => {
   return (
-    <figure className='col-start-2 col-end-4 col-span-2'>
-      <img src={logo} alt="Company Logo" className='h-[56px] w-[206px]' />
-    </figure>
+      <figure className='col-start-2 col-end-4 col-span-2'>
+        <Link to={'/'}>
+          <img 
+            src={logo} 
+            alt="Company Logo" 
+            className={`h-[56px] w-[206px] ${className}`} 
+          />
+        </Link>
+      </figure>
   );
 };
 
 const Navigation = () => {
+
+  const [open, setOpen] = useState()
+
   return (
-    <nav role='navigation'  className="gridLayout flex justify-center items-center">
-      <LogoImage logo={Logo} />
-      <NavigationItems/>
+
+    <nav role='navigation'  className="gridLayout items-center">
+      <section className='lg:visible lg:grid grid-cols-12 col-start-1 col-end-13 sm:hidden items-center'>
+        <LogoImage logo={Logo} />
+        <NavigationItems/>
+      </section>
+      
+      <section className='lg:hidden sm:visible col-start-1 col-end-5'>
+        <div className='sm:flex justify-between'>
+          <LogoImage logo={Logo} />
+          <button className='lg:hidden sm:visible'>
+            {open ? <X color='#333333' onClick={() =>setOpen(!open)}/> : <Menu color='#333333' onClick={() =>setOpen(!open) } />}
+            
+          </button>
+        </div>
+      </section>
+
+      {open && (
+        <section className="sm:block lg:hidden col-start-1 col-end-4">
+          <div className=''>
+            <NavigationItems />
+          </div>
+        </section>
+      )}
+
     </nav>
   )
 }

@@ -3,12 +3,8 @@
 @import "tailwindcss";
 
 
-* {
-    margin: 0;
-    padding: 0;
-}
-
 @theme {
+
     --font-markazi: 'Markazi Text', serif;
     --font-karla: 'Karla', sans-serif;
 
@@ -26,14 +22,34 @@
     --color-secondary-2: #FBDABB; /* pink */
     --color-secondary-3: #EDEFED; /* light grey */
     --color-secondary-4: #333333; /* dark grey */
+
+    --breakpoint-sm: 30rem;
+    --breakpoint-2xl: 100rem;
+    --breakpoint-3xl: 120rem;
 }
 
 .gridLayout {
-    @apply grid grid-cols-12 md:grid-cols-4 lg:grid-cols-12 gap-5 px-12 py-12;
+    @apply lg:grid lg:grid-cols-12 lg:gap-5 lg:px-24 lg:py-12 md:grid-cols-4 sm:grid sm:grid-cols-4 sm:gap-5 sm:px-12 sm:py-12
 }
 
 .button {
-    @apply text-sm font-extrabold px-4 py-4 rounded-2xl;
+    @apply text-sm font-extrabold py-4 rounded-2xl px-4 hover:scale-105 transition-all delay-150 duration-300 ease-in-out ;
+}
+
+.navigationList {
+    @apply text-md font-karla font-bold text-secondary-4 uppercase hover:border-b-[3px] hover:border-secondary-4 focus:text-primary-2 focus:border-b-[3px] focus:border-primary-2 transition-all
+}
+
+.title {
+   @apply font-markazi font-extrabold text-2xl py-4 
+}
+
+.FooterTitle {
+    @apply text-md font-karla font-bold text-secondary-3 uppercase pb-4
+}
+
+.footerList {
+    @apply text-sm font-karla text-secondary-3  space-y-8
 }
 
 .primaryButton {
@@ -44,5 +60,15 @@
     @apply bg-primary-1 text-primary-2;
 }
 
+.cardTitle {
+    @apply font-karla font-bold text-sm 
+}
 
+.cardDescription {
+    @apply font-karla text-secondary-4 overflow-ellipsis
+}
+
+.cardCTA {
+    @apply flex font-karla text-sm font-medium items-center
+}
 
