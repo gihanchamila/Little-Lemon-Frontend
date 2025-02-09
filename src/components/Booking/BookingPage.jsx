@@ -1,7 +1,7 @@
 import React, { useReducer, useEffect, useState } from 'react';
 import BookingForm from './BookingForm';
 
-import { fetchAPI } from '../../api/api';
+import { fetchAPI, submitAPI } from '../../api/api';
 
 const availableTimesReducer = (state, action) => {
   switch (action.type) {
@@ -20,6 +20,11 @@ const BookingPage = () => {
     const times = fetchAPI(today);
     dispatch({ type: 'UPDATE_TIMES', payload: times });
   }, [])
+
+  const  submitForm = (formData) => {
+    submitAPI(formData)
+
+  }
 
   return (
     <BookingForm availableTimes={availableTimes} dispatch={dispatch}/>
