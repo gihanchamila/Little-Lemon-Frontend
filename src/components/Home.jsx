@@ -21,7 +21,7 @@ const Text = ({ description }) => {
 const Home = () => {
   
   return (
-    <main className="gridLayout bg-primary-1">
+    <main className="gridLayout bg-primary-1 mt-12">
       {/* Left Side (Text & Button) */}
       <section className="lg:col-start-2 lg:text-left lg:col-end-5 lg:col-span-4 lg:flex lg:flex-col lg:justify-between lg:gap-6 sm:col-start-1 sm:col-span-full sm:text-center sm:space-y-4">
         <HeaderText titleColor={`text-primary-2`} subTitleColor={"text-secondary-3"} />

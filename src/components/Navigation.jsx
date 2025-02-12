@@ -73,7 +73,7 @@ const Navigation = () => {
 
   return (
 
-    <nav role='navigation'  className="gridLayout items-center">
+    <nav role='navigation'  className="lg:grid lg:grid-cols-12 lg:gap-5 lg:px-24 lg:py-12 lg:pb-0 md:grid-cols-4 sm:grid sm:grid-cols-4 sm:gap-5 sm:px-12 sm:pt-12 sm:pb-0 items-center">
       <section className='lg:visible lg:grid grid-cols-12 col-start-1 col-end-13 sm:hidden items-center'>
         <LogoImage logo={Logo} />
         <NavigationItems/>
