@@ -98,21 +98,24 @@ const BookingForm = (props) => {
                     {formErrors.occasion && <p className="text-red-500 text-sm">{formErrors.occasion}</p>}
                 </div>
             </div>
-            <div className="sm:flex sm:flex-col lg:flex-row lg:items-center lg:justify-start lg:pt-5 sm:pt-5">
-                <p className="text-sm font-extrabold text-primary-1 font-karla mr-10 relative sm:mb-5 lg:mb-0">Seating type :<Asterisk size={12} color={"#fb2c36"} className="absolute top-0 left-[125px]" /></p>
-                <div className="sm:flex sm:flex-row">
-                  <div className="flex flex-row text-primary-1 text-sm font-karla font-extrabold w-[200px] space-x-2 items-center">
-                      <label htmlFor="indoor" className="relative">Indoor Seating </label>
-                      <input className="fieldInput ml-2" id="indoor" value="Indoor" checked={seating === "Indoor"}  onChange={(e) => setSeating(e.target.value)} type="radio" ></input>
-                  </div>
-                  <div className="flex flex-row text-primary-1 text-sm font-karla font-extrabold w-[200px] space-x-2 items-center">
-                      <label htmlFor="outdoor" className="relative">Outdoor Seating </label>
-                      <input className="fieldInput ml-2" id="outdoor"  value="Outdoor" checked={seating === "Outdoor"}  onChange={(e) => setSeating(e.target.value)} type="radio"></input>
-                  </div>
-                  {formErrors.seating && <p className="formError font-bold">{formErrors.seating}</p>}
-                </div>
-                
+            <div className="flex flex-col">
+              <div className="sm:flex sm:flex-col lg:flex-row lg:items-center lg:justify-start lg:pt-5 sm:pt-5">
+                  <p className="text-sm font-extrabold text-primary-1 font-karla mr-10 relative sm:mb-2 lg:mb-0">Seating type :<Asterisk size={12} color={"#fb2c36"} className="absolute top-0 left-[125px]" /></p>
+                  <div className="sm:flex sm:flex-row sm:space-x-4">
+                    <div className="flex flex-row text-primary-1 text-sm font-karla font-extrabold w-[200px] space-x-2 items-center">
+                        <label htmlFor="indoor" className="relative">Indoor Seating </label>
+                        <input className="fieldInput ml-2" id="indoor" value="Indoor" checked={seating === "Indoor"}  onChange={(e) => setSeating(e.target.value)} type="radio" ></input>
+                    </div>
+                    <div className="flex flex-row text-primary-1 text-sm font-karla font-extrabold w-[200px] space-x-2 items-center">
+                        <label htmlFor="outdoor" className="relative">Outdoor Seating </label>
+                        <input className="fieldInput ml-2" id="outdoor"  value="Outdoor" checked={seating === "Outdoor"}  onChange={(e) => setSeating(e.target.value)} type="radio"></input>
+                    </div>
+                    
+                  </div> 
+              </div>
+              {formErrors.seating && <p className="formError font-bold">{formErrors.seating}</p>}
             </div>
+            
             
           </fieldset>
           <div className="flex justify-end pt-10"> 

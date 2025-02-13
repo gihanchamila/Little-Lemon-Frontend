@@ -1,8 +1,10 @@
 import React from 'react';
 
 const Button = ({ type = 'primary', className = '', outline = false, children, ...buttonProps }) => {
-  const baseClassName = type === 'primary' ? 'primaryButton' : 'outlineButton';
+  const baseClassName = type === 'primary' ? 'primaryButton' : 'secondaryButton';
   const outlineClassName = outline ? 'outlineButton' : '';
+
+  
   
   const combinedClassName = `button ${baseClassName} ${outlineClassName} ${className}`.trim();
 

@@ -81,7 +81,7 @@ const DoormatItems = () => {
       <ul>
         {doormatLinks.map((link) => (
           <li key={link.id}>
-            <NavLink className={'footerList'} to={link.link}>{link.name}</NavLink>
+            <NavLink className={'footerList'}>{link.name}</NavLink>
           </li>
         ))}
       </ul>
@@ -98,7 +98,7 @@ const ContactItems = () => {
       <ul>
         {contactLinks.map((link) => (
           <li key={link.id}>
-            <NavLink className={'footerList'} to={link.link}>{link.name}</NavLink>
+            <NavLink className={'footerList'}>{link.name}</NavLink>
           </li>
         ))}
       </ul>
@@ -110,12 +110,12 @@ const SocialItems = () => {
   return (
     <nav aria-label="Social Media Links">
       <header>
-        <h2 className='FooterTitle'>Social Media Links</h2>
+        <h2 className='FooterTitle lg:mb-7 sm:mb-0'>Social Media Links</h2>
       </header>
       <ul>
         {socialLinks.map((link) => (
           <li className="" key={link.id}>
-            <NavLink className={'footerList'} to={link.link}>{link.name}</NavLink>
+            <NavLink className={'footerList'} >{link.name}</NavLink>
           </li>
         ))}
       </ul>

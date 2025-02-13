@@ -7,7 +7,7 @@ const ratingList = [
     {
         id : 1,
         image : person01,
-        name : "Gihan Chamila",
+        name : "Ethan Cole",
         rating : 4,
         description : "The food was absolutely delicious, and the service was exceptional. I can't wait to come back and try more dishes!"
     },
@@ -15,7 +15,7 @@ const ratingList = [
     {
         id : 2,
         image : person02,
-        name : "Nipuni Nimanshi",
+        name : "Noah Bennett",
         rating : 5,
         description : "Great food and a lovely atmosphere, but the wait time was a bit long. Overall, a solid dining experience!"
     },
@@ -23,7 +23,7 @@ const ratingList = [
     {
         id : 3,
         image : person03,
-        name : "Rashini Seumini",
+        name : "Lily Harper",
         rating : 3,
         description : "The food was okay, but nothing special. Service could have been better, as we had to wait a while to get our order."
     },
@@ -31,7 +31,7 @@ const ratingList = [
     {
         id : 4,
         image : person04,
-        name : "John doe",
+        name : "Ava Sinclair",
         rating : 1,
         description : "The food was disappointing, and the flavors were bland. The service was slow, and I probably wouldn’t come back"
     }
