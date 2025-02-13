@@ -64,7 +64,7 @@ const BookingForm = (props) => {
   return (
     <header>
       <section className="gridLayout">
-        <form onSubmit={handleSubmit} className="lg:col-start-2 lg:col-end-12 sm:col-start-1 sm:col-end-4 col-span-4">
+        <form onSubmit={handleSubmit} className="lg:col-start-2 lg:col-end-12 sm:col-start-1 sm:col-end-5 sm:col-span-4">
           <fieldset className="flex flex-col space-y-2">
             <div className="lg:flex lg:flex-row lg:justify-between sm:flex sm:flex-col lg:space-y-0 sm:space-y-2">
                 <div className="field">
@@ -98,16 +98,16 @@ const BookingForm = (props) => {
                     {formErrors.occasion && <p className="text-red-500 text-sm">{formErrors.occasion}</p>}
                 </div>
             </div>
-            <div className="sm:flex lg:flex-col sm:flex-row">
+            <div className="sm:flex lg:flex-col sm:flex-col">
               <div className="sm:flex sm:flex-col lg:flex-row lg:items-center lg:justify-start lg:pt-5 sm:pt-5">
-                  <p className="text-sm font-extrabold text-primary-1 font-karla mr-10 relative sm:mb-2 lg:mb-0">Seating type :<Asterisk size={12} color={"#fb2c36"} className="absolute top-0 left-[125px]" /></p>
+                  <p className="text-sm font-extrabold text-primary-1 font-karla mr-10 relative sm:mb-2 lg:mb-0">Seating type<Asterisk size={12} color={"#fb2c36"} className="absolute top-0 left-[115px]" /></p>
                   <div className="sm:flex sm:flex-col lg:flex-row sm:space-x-4">
-                    <div className="flex flex-row text-primary-1 text-sm font-karla font-extrabold w-[200px] space-x-2 items-center">
-                        <label htmlFor="indoor" className="relative">Indoor Seating </label>
+                    <div className="flex flex-row text-primary-1 text-sm font-karla font-extrabold w-[100px] space-x-2 items-center sm:justify-between">
+                        <label htmlFor="indoor" className="relative">Indoor</label>
                         <input className="lg:fieldInput ml-2" id="indoor" value="Indoor" checked={seating === "Indoor"}  onChange={(e) => setSeating(e.target.value)} type="radio" ></input>
                     </div>
-                    <div className="flex sm:flex-row text-primary-1 text-sm font-karla font-extrabold w-[200px] space-x-2 items-center">
-                        <label htmlFor="outdoor" className="relative">Outdoor Seating </label>
+                    <div className="flex sm:flex-row text-primary-1 text-sm font-karla font-extrabold w-[100px] space-x-2 items-center sm:justify-between">
+                        <label htmlFor="outdoor" className="relative">Outdoor</label>
                         <input className="lg:fieldInput ml-2" id="outdoor"  value="Outdoor" checked={seating === "Outdoor"}  onChange={(e) => setSeating(e.target.value)} type="radio"></input>
                     </div>
                   </div> 

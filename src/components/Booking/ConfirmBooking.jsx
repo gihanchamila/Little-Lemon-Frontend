@@ -13,7 +13,6 @@ const InputDetails = ({name, value}) => {
   )
 }
 
-
 const ConfirmBooking = () => {
   const [formData, setFormData] = useState({})
 

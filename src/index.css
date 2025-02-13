@@ -122,3 +122,7 @@
 .formError {
     @apply text-red-500 text-sm
 }
+
+.no-scroll {
+    @apply overflow-hidden
+}

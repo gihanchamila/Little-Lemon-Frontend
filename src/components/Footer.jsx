@@ -125,16 +125,16 @@ const SocialItems = () => {
 
 const Footer = () => {
   return (
-    <footer className='gridLayout bg-primary-1'>
+    <footer className='gridLayout sm:col-start-1 sm:col-end-4 bg-primary-1'>
       <div className='lg:col-start-2 mb-12'>
         <LogoImage logo={LogoFooter} className={`lg:h-full lg:col-start-2 lg:col-end-5 lg:col-span-4 sm:w-[200px sm:h-full`} />
       </div>
         
-        <div className="sm:grid lg:col-start-5 lg:col-end-12 lg:col-span-9 lg:grid-cols-3 gap-16 sm:col-start-1">
-          <DoormatItems  />
-          <ContactItems />
-          <SocialItems />
-        </div> 
+      <div className="sm:grid lg:col-start-5 lg:col-end-12 lg:col-span-9 lg:grid-cols-3 gap-16 sm:col-start-1">
+        <DoormatItems  />
+        <ContactItems />
+        <SocialItems />
+      </div> 
     </footer>
   )
 }

@@ -37,7 +37,7 @@ const Special = () => {
         <div className='lg:col-start-2 lg:col-end-12 lg:space-y-4 sm:col-start-1 sm:col-end-5 sm:col-span-5'>
             <div className='flex flex-col lg:flex-row items-center justify-between space-y-4 lg:space-y-0'>
                 <header className='text-center lg:text-left'>
-                    <h2 className='title text-secondary-4'>This Week's Specials!</h2>
+                    <h2 className='title text-secondary-4 sm:leading-14'>This Week's Specials!</h2>
                 </header>
                 <div className='sm:w-full lg:w-auto'>
                     <Button type="primary" className='lg:w-full sm:w-full'>Order Online</Button>

@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { Link as ScrollLink } from 'react-scroll';
 import { Menu, X } from 'lucide-react';
 import {Logo} from '../assets'
@@ -42,7 +42,7 @@ const navigationLinks = [
   }
 ];
 
-const NavigationItems = () => {
+const NavigationItems = ({closeMenu, handleNavigate}) => {
   return (
     <ul className='lg:col-start-5 lg:col-end-12 lg:-span-9 lg:flex-row lg:justify-between lg:mt-0 lg:items-center lg:space-y-0 lg:h-fit sm:flex sm:flex-col sm:space-y-8 sm:mt-12 sm:h-dvh'>
       {navigationLinks.map((link) => (
@@ -51,8 +51,12 @@ const NavigationItems = () => {
             to={link.link.replace("#", "")} 
             smooth={true} 
             duration={500} 
-            offset={-100} 
+            offset={-980} 
             className={"navigationList cursor-pointer"}
+            onClick={() => {
+              closeMenu(); 
+              handleNavigate(link.link);
+            }}
           >
             {link.name}
           </ScrollLink>
@@ -79,6 +83,31 @@ export const LogoImage = ({ logo, className }) => {
 const Navigation = () => {
 
   const [open, setOpen] = useState()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (open) {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
+
+    // Cleanup function to remove the class when component unmounts
+    return () => document.body.classList.remove('no-scroll');
+  }, [open]);
+
+  const closeMenu = () => {
+    setOpen(false);
+  };
+
+  const handleNavigate = (link) => {
+    if (link === "#home") {
+      navigate('/'); 
+    } else {
+      window.location.hash = link;
+    }
+  };
+
 
   return (
 
@@ -101,7 +130,7 @@ const Navigation = () => {
       {open && (
         <section className="sm:block lg:hidden col-start-1 col-end-4">
           <div className=''>
-            <NavigationItems />
+            <NavigationItems closeMenu={closeMenu} handleNavigate={handleNavigate} />
           </div>
         </section>
       )}

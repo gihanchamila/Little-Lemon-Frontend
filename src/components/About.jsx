@@ -18,13 +18,13 @@ const About = () => {
         </article>
         <aside className='lg:col-start-7 lg:col-end-12 lg:h-full sm:h-full sm:col-start-1 sm:col-end-5 sm:col-span-4' >
             <div className='lg:h-[446px] lg:w-[567px] sm:w-[300px] sm-h-[800px] sm:h-auto relative '>
-                <figure className="sm:relative sm:h-[300px]">
+                <figure className="sm:relative sm:h-auto">
                     <img src={photoA} alt="Owner's photo in professional setting" role="img" className="lg:h-[275px] lg::w-[345px]  sm:object-cover sm:rounded-2xl" />
                     <img
                         src={photoB}
                         alt="Owner's photo smiling outdoors"
                         role="img"
-                        className="lg:h-[275px] lg:w-[345px] sm:absolute sm:h-auto sm:top-0 sm:left-1/2 sm:transform sm:-translate-x-1/4 sm:translate-y-1/2 sm:object-cover sm:rounded-2xl"
+                        className="sm:hidden lg:h-[275px] lg:w-[345px] sm:absolute sm:h-auto sm:top-0 sm:left-1/2 sm:transform sm:-translate-x-1/4 sm:translate-y-1/2 sm:object-cover sm:rounded-2xl"
                     />
                 </figure>
             </div>
