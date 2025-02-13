@@ -5,10 +5,6 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-<<<<<<< HEAD
-  base:"/Little-Lemon/",
-=======
->>>>>>> parent of 84823fa (add base)
   plugins: [react(), tailwindcss()],
   test: {
     globals: true,
