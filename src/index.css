@@ -1,7 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
 @import "tailwindcss";
 
-* {
-    margin: 0;
-    padding: 0;
+
+@theme {
+
+    --font-markazi: 'Markazi Text', serif;
+    --font-karla: 'Karla', sans-serif;
+
+    --text-tiny: 1rem; /* 16px */
+    --text-sm: 1.12rem; /* 18px */
+    --text-md: 1.25rem; /* 20px */
+    --text-lg: 2.5rem; /* 40px */
+    --text-xl: 3.5rem;    /* 54px */
+    --text-2xl: 4rem; /* 64px */
+
+    --color-primary-1: #495E57; /* green */
+    --color-primary-2: #F4CE14; /* yellow */
+
+    --color-secondary-1: #EE9972; /* orange */
+    --color-secondary-2: #FBDABB; /* pink */
+    --color-secondary-3: #EDEFED; /* light grey */
+    --color-secondary-4: #333333; /* dark grey */
+
+    --breakpoint-sm: 30rem;
+    --breakpoint-2xl: 100rem;
+    --breakpoint-3xl: 120rem;
+
+    --PhoneInput-color--focus : none
+    --PhoneInput-border : none
 }
 
+.gridLayout {
+    @apply lg:grid lg:grid-cols-12 lg:gap-5 lg:px-24 lg:py-12 md:grid-cols-4 sm:grid sm:grid-cols-4 sm:gap-5 sm:px-12 sm:py-12
+}
+
+.button {
+    @apply text-sm font-extrabold py-4 rounded-2xl px-4 hover:opacity-90 transition-all cursor-pointer ;
+}
+
+.outline {
+    @apply border-2 rounded-lg text-secondary-3
+}
+
+.navigationList {
+    @apply text-md font-karla font-bold text-secondary-4 uppercase hover:border-b-[3px] hover:border-secondary-4 focus:text-primary-2 focus:border-b-[3px] focus:border-primary-2 transition-all
+}
+
+.title {
+   @apply font-markazi font-extrabold text-2xl py-4 
+}
+
+.FooterTitle {
+    @apply text-md font-karla font-bold text-secondary-3 uppercase pb-4
+}
+
+.footerList {
+    @apply text-sm font-karla text-secondary-3  space-y-8
+}
+
+.primaryButton {
+    @apply bg-primary-2 text-secondary-4 ;
+}
+
+.secondaryButton {
+    @apply bg-primary-1 text-primary-2;
+}
+
+.cardTitle {
+    @apply font-karla font-bold text-sm 
+}
+
+.cardDescription {
+    @apply font-karla text-secondary-4 overflow-ellipsis
+}
+
+.cardCTA {
+    @apply flex font-karla text-sm font-medium items-center
+}
+
+.field {
+    @apply flex flex-col text-primary-1 text-sm font-karla font-extrabold lg:w-[500px] space-x-2 sm:w-[387px]
+}
+
+.fieldInput {
+    @apply border-2 border-primary-1 rounded-lg p-4 accent-primary-1 h-full 
+}
+
+.userField {
+    @apply text-sm font-karla font-extrabold text-secondary-3 relative
+}
+
+.userInput {
+    @apply text-sm font-karla font-extrabold bg-secondary-3 border-2 border-primary-2 p-4 rounded-lg w-[500px]
+}
+
+.confirmInput {
+    @apply text-sm font-karla font-extrabold bg-secondary-3 border-2 border-primary-2 p-4 rounded-lg focus:border-none
+}
+
+.PhoneInput {
+    @apply flex items-center border-none active:border-none 
+}
+
+.PhoneInputInput {
+    @apply  active:border-none focus:border-none
+}
+
+.PhoneInputCountry {
+    @apply relative self-stretch flex items-center
+}
+
+.PhoneInputCountrySelect {
+    @apply absolute top-0 left-0 h-full w-full z-10 border-0  cursor-pointer
+}
+
+.inputDetails {
+    @apply  font-karla font-extrabold 
+}
+
+.formError {
+    @apply text-red-500 text-sm
+}
