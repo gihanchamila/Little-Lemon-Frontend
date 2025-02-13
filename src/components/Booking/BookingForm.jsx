@@ -64,9 +64,9 @@ const BookingForm = (props) => {
   return (
     <header>
       <section className="gridLayout">
-        <form onSubmit={handleSubmit} className="col-start-2 col-end-12">
+        <form onSubmit={handleSubmit} className="lg:col-start-2 lg:col-end-12 sm:col-start-1 sm:col-end-5">
           <fieldset className="flex flex-col space-y-2">
-            <div className="flex justify-between">
+            <div className="lg:flex lg:flex-row lg:justify-between sm:flex sm:flex-col lg:space-y-0 sm:space-y-2">
                 <div className="field">
                     <label htmlFor="book-date" className="pb-2 relative">Choose Date <Asterisk size={12} color={"#fb2c36"} className="absolute top-1 left-28" /></label>
                     <input className="fieldInput" id="book-date" value={date} onChange={(e) => handleChange(e.target.value)} type="date"/>
@@ -82,7 +82,7 @@ const BookingForm = (props) => {
                     {formErrors.times && <p className="text-red-500 text-sm">{formErrors.times}</p>}
                 </div>
             </div>
-            <div className="flex justify-between">
+            <div className="lg:justify-between lg:flex-row sm:flex sm:flex-col sm:space-y-2 lg:space-y-0">
                 <div className="field">
                     <label htmlFor="book-guests" className="pb-2 relative">Number of Guests<Asterisk size={12} color={"#fb2c36"} className="absolute top-1 left-40" /></label>
                     <input className="fieldInput" id="book-guests" min="1" value={guests} onChange={(e) => {setGuests(e.target.value)}} type={"number"} placeholder={0} max={10}></input>
@@ -98,17 +98,20 @@ const BookingForm = (props) => {
                     {formErrors.occasion && <p className="text-red-500 text-sm">{formErrors.occasion}</p>}
                 </div>
             </div>
-            <div className="flex justify-start pt-10">
-                <p className="text-sm font-extrabold text-primary-1 font-karla mr-10 relative">Seating type :<Asterisk size={12} color={"#fb2c36"} className="absolute top-0 left-[125px]" /></p>
-                <div className="flex flex-row text-primary-1 text-sm font-karla font-extrabold w-[200px] space-x-2 items-center">
-                    <label htmlFor="indoor" className="relative">Indoor Seating </label>
-                    <input className="fieldInput ml-2" id="indoor" value="Indoor" checked={seating === "Indoor"}  onChange={(e) => setSeating(e.target.value)} type="radio" ></input>
+            <div className="sm:flex sm:flex-col lg:flex-row lg:items-center lg:justify-start lg:pt-5 sm:pt-5">
+                <p className="text-sm font-extrabold text-primary-1 font-karla mr-10 relative sm:mb-5 lg:mb-0">Seating type :<Asterisk size={12} color={"#fb2c36"} className="absolute top-0 left-[125px]" /></p>
+                <div className="sm:flex sm:flex-row">
+                  <div className="flex flex-row text-primary-1 text-sm font-karla font-extrabold w-[200px] space-x-2 items-center">
+                      <label htmlFor="indoor" className="relative">Indoor Seating </label>
+                      <input className="fieldInput ml-2" id="indoor" value="Indoor" checked={seating === "Indoor"}  onChange={(e) => setSeating(e.target.value)} type="radio" ></input>
+                  </div>
+                  <div className="flex flex-row text-primary-1 text-sm font-karla font-extrabold w-[200px] space-x-2 items-center">
+                      <label htmlFor="outdoor" className="relative">Outdoor Seating </label>
+                      <input className="fieldInput ml-2" id="outdoor"  value="Outdoor" checked={seating === "Outdoor"}  onChange={(e) => setSeating(e.target.value)} type="radio"></input>
+                  </div>
+                  {formErrors.seating && <p className="formError font-bold">{formErrors.seating}</p>}
                 </div>
-                <div className="flex flex-row text-primary-1 text-sm font-karla font-extrabold w-[200px] space-x-2 items-center">
-                    <label htmlFor="outdoor" className="relative">Outdoor Seating </label>
-                    <input className="fieldInput ml-2" id="outdoor"  value="Outdoor" checked={seating === "Outdoor"}  onChange={(e) => setSeating(e.target.value)} type="radio"></input>
-                </div>
-                {formErrors.seating && <p className="formError font-bold">{formErrors.seating}</p>}
+                
             </div>
             
           </fieldset>

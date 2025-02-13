@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { Link as ScrollLink } from 'react-scroll';
 import { Menu, X } from 'lucide-react';
 import {Logo} from '../assets'
 
@@ -46,7 +47,15 @@ const NavigationItems = () => {
     <ul className='lg:col-start-5 lg:col-end-12 lg:-span-9 lg:flex-row lg:justify-between lg:mt-0 lg:items-center lg:space-y-0 lg:h-fit sm:flex sm:flex-col sm:space-y-8 sm:mt-12 sm:h-dvh'>
       {navigationLinks.map((link) => (
         <li key={link.id}>
-          <a href={link.link} className={"navigationList"}>{link.name}</a>
+          <ScrollLink 
+            to={link.link.replace("#", "")} 
+            smooth={true} 
+            duration={500} 
+            offset={-100} 
+            className={"navigationList cursor-pointer"}
+          >
+            {link.name}
+          </ScrollLink>
         </li>
       ))}
     </ul>

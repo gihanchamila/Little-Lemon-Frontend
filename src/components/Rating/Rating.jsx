@@ -5,7 +5,7 @@ import { person01 } from '../../assets'
 const Rating = ({name, image, description, rating}) => {
   return (
     <article className="lg:flex lg:flex-col w-[260px]  max-w-sm ">
-        <div className='flex flex-col space-y-4 p-4 bg-secondary-3 h-full w-full rounded-2xl'>
+        <div className='flex flex-col space-y-4 p-4 bg-secondary-3 hover:opacity-90 cursor-pointer h-full w-full rounded-2xl'>
             <header className='flex justify-between'>
                 <p className='cardTitle'>Ratings</p>
             </header>

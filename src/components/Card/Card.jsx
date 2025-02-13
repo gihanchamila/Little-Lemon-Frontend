@@ -9,7 +9,7 @@ const Card = ({image, name, children, className, description, price, text}) => {
         <figure className=''>
             <img src={image} className='lg:h-[250px] lg:w-[300px] sm:w-full sm:h-full rounded-t-2xl object-cover' alt="A description of the image" role='img' />
         </figure>
-        <div className='flex flex-col space-y-4 px-4 py-4 bg-secondary-3 rounded-b-2xl'>
+        <div className='flex flex-col space-y-4 px-4 py-4 bg-secondary-3 hover:opacity-90 cursor-pointer rounded-b-2xl'>
             <header className='flex justify-between'>
                 <h2 className='cardTitle'>{name}</h2>
                 <p className='cardTitle text-secondary-1'>${price}</p>

@@ -36,7 +36,11 @@
 }
 
 .button {
-    @apply text-sm font-extrabold py-4 rounded-2xl px-4 ;
+    @apply text-sm font-extrabold py-4 rounded-2xl px-4 hover:opacity-90 transition-all cursor-pointer ;
+}
+
+.outlineButton {
+    @apply border-2 rounded-2xl text-secondary-3 bg-secondary-3
 }
 
 .navigationList {
@@ -76,15 +80,15 @@
 }
 
 .field {
-    @apply flex flex-col text-primary-1 text-sm font-karla font-extrabold w-[500px] space-x-2
+    @apply flex flex-col text-primary-1 text-sm font-karla font-extrabold lg:w-[500px] space-x-2 sm:w-[387px]
 }
 
 .fieldInput {
-    @apply border-2 border-primary-1 rounded-lg p-4 accent-primary-1 h-full
+    @apply border-2 border-primary-1 rounded-lg p-4 accent-primary-1 h-full 
 }
 
 .userField {
-    @apply text-sm font-karla font-extrabold text-secondary-3
+    @apply text-sm font-karla font-extrabold text-secondary-3 relative
 }
 
 .userInput {

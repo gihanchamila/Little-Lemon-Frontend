@@ -1,15 +1,16 @@
-import React from 'react'
+import React from 'react';
 
-const Button = ({type, className, children, ...buttonProps}) => {
-    
-    const baseClassName = type === 'primary' ? "primaryButton" : "secondaryButton";
-    const combinedClassName = `${baseClassName} ${className || ''}`;
+const Button = ({ type = 'primary', className = '', outline = false, children, ...buttonProps }) => {
+  const baseClassName = type === 'primary' ? 'primaryButton' : 'outlineButton';
+  const outlineClassName = outline ? 'outlineButton' : '';
   
-    return (
-      <button role='button' className={`button ${combinedClassName}`} {...buttonProps}>
-        {children}
-      </button>
-    );
-}
+  const combinedClassName = `button ${baseClassName} ${outlineClassName} ${className}`.trim();
 
-export default Button
+  return (
+    <button role="button" className={combinedClassName} {...buttonProps}>
+      {children}
+    </button>
+  );
+};
+
+export default Button;

@@ -26,11 +26,11 @@ const ConfirmBooking = () => {
 
   return (
     <>
-      <header className='gridLayout'>
-        <h2 className='lg:col-start-2 lg:col-end-12 lg:text-2xl font-markazi font-extrabold text-primary-1 sm:col-start-1 sm:col-end-5 sm:text-xl'>Confirm your reservation</h2>
+      <header className='lg:grid lg:grid-cols-12 lg:gap-5 lg:px-24  md:grid-cols-4 sm:grid sm:grid-cols-4 sm:gap-5 sm:px-12 sm:py-12'>
+        <h2 className='lg:col-start-2 lg:col-end-12 lg:text-2xl font-markazi font-extrabold text-primary-1 sm:col-start-1 sm:col-end-5 sm:text-xl leading-14'>Confirm your reservation</h2>
       </header>
       <main className=''>
-        <div className='gridLayout p-0'>
+        <div className='lg:grid lg:grid-cols-12 lg:gap-5 lg:px-24 md:grid-cols-4 sm:grid sm:grid-cols-4 sm:gap-5 sm:px-12 sm:pb-12'>
           <div className='lg:col-start-2 lg:col-end-12 lg:justify-between border-2 rounded-xl border-secondary-4 p-4 sm:flex sm:flex-row sm:col-start-1 sm:col-end-5 sm:gap-4'>
             <InputDetails name={"Date"} value={formData.date} />
             <InputDetails name={"Time"} value={formData.times} />
