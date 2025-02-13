@@ -23,6 +23,7 @@
     --color-secondary-3: #EDEFED; /* light grey */
     --color-secondary-4: #333333; /* dark grey */
 
+    --breakpoint-sm: 45rem;
     --breakpoint-2xl: 100rem;
     --breakpoint-3xl: 120rem;
 
