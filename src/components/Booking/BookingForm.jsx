@@ -2,6 +2,18 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Button from "../Button/Button";
 
+import { Star, StarIcon, Asterisk } from "lucide-react";
+
+export const Field = ({labelText, id, value, onChange, type, checked, placeholder, formErrors, ...props }) => {
+
+  return (
+    <field className="field">
+        <label htmlFor={id} className="pb-2 relative">{labelText}<Asterisk size={12} color={"#fb2c36"} className="absolute top-1 left-28" /></label>
+        <input className="fieldInput" id={id} value={value} name={id} onChange={onChange} type={type}/>
+    </field> 
+  )
+}
+
 const BookingForm = (props) => {
 
    const [occasion, setOccasion] = useState("");
@@ -56,12 +68,13 @@ const BookingForm = (props) => {
           <fieldset className="flex flex-col space-y-2">
             <div className="flex justify-between">
                 <div className="field">
-                    <label htmlFor="book-date" className="pb-2">Choose Date:</label>
+                    <label htmlFor="book-date" className="pb-2 relative">Choose Date <Asterisk size={12} color={"#fb2c36"} className="absolute top-1 left-28" /></label>
                     <input className="fieldInput" id="book-date" value={date} onChange={(e) => handleChange(e.target.value)} type="date"/>
+                    {/* <Field labelText={"Choose Date"} id={"book-date"} value={date} onChange={(e) => handleChange(e.target.value)} type="date" /> */}
                     {formErrors.date && <p className="text-red-500 text-sm">{formErrors.date}</p>}
                 </div>
                 <div className="field">
-                    <label htmlFor="book-time" className="pb-2">Choose Time:</label>
+                    <label htmlFor="book-time" className="pb-2 relative">Choose Time <Asterisk size={12} color={"#fb2c36"} className="absolute top-1 left-28" /></label>
                     <select className="fieldInput" id="book-time" value={times} onChange={(e) => setTimes(e.target.value)}>
                         <option value="">Select a Time</option>
                     {props.availableTimes.availableTimes.map(availableTimes => {return <option key={availableTimes}>{availableTimes}</option>})}
@@ -71,12 +84,12 @@ const BookingForm = (props) => {
             </div>
             <div className="flex justify-between">
                 <div className="field">
-                    <label htmlFor="book-guests" className="pb-2">Number of Guests:</label>
+                    <label htmlFor="book-guests" className="pb-2 relative">Number of Guests<Asterisk size={12} color={"#fb2c36"} className="absolute top-1 left-40" /></label>
                     <input className="fieldInput" id="book-guests" min="1" value={guests} onChange={(e) => {setGuests(e.target.value)}} type={"number"} placeholder={0} max={10}></input>
                     {formErrors.guests && <p className="text-red-500 text-sm">{formErrors.guests}</p>}
                 </div>
                 <div className="field">
-                    <label htmlFor="book-occasion" className="pb-2">Occasion:</label>
+                    <label htmlFor="book-occasion" className="pb-2 relative">Occasion <Asterisk size={12} color={"#fb2c36"} className="absolute top-1 left-21" /></label>
                     <select className="fieldInput" id="book-occasion" key={occasion} value={occasion} onChange={(e) => setOccasion(e.target.value)}>
                         <option value="">Select an Option</option>
                         <option>Birthday</option>
@@ -86,13 +99,14 @@ const BookingForm = (props) => {
                 </div>
             </div>
             <div className="flex justify-start pt-10">
+                <p className="text-sm font-extrabold text-primary-1 font-karla mr-10 relative">Seating type :<Asterisk size={12} color={"#fb2c36"} className="absolute top-0 left-[125px]" /></p>
                 <div className="flex flex-row text-primary-1 text-sm font-karla font-extrabold w-[200px] space-x-2 items-center">
-                    <label htmlFor="indoor" className="">Indoor Seating</label>
-                    <input className="fieldInput" id="indoor" value="Indoor" checked={seating === "Indoor"}  onChange={(e) => setSeating(e.target.value)} type="radio" ></input>
+                    <label htmlFor="indoor" className="relative">Indoor Seating </label>
+                    <input className="fieldInput ml-2" id="indoor" value="Indoor" checked={seating === "Indoor"}  onChange={(e) => setSeating(e.target.value)} type="radio" ></input>
                 </div>
                 <div className="flex flex-row text-primary-1 text-sm font-karla font-extrabold w-[200px] space-x-2 items-center">
-                    <label htmlFor="outdoor" className="">Outdoor Seating</label>
-                    <input className="fieldInput" id="outdoor"  value="Outdoor" checked={seating === "Outdoor"}  onChange={(e) => setSeating(e.target.value)} type="radio"></input>
+                    <label htmlFor="outdoor" className="relative">Outdoor Seating </label>
+                    <input className="fieldInput ml-2" id="outdoor"  value="Outdoor" checked={seating === "Outdoor"}  onChange={(e) => setSeating(e.target.value)} type="radio"></input>
                 </div>
                 {formErrors.seating && <p className="formError font-bold">{formErrors.seating}</p>}
             </div>
