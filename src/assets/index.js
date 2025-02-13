@@ -13,6 +13,6 @@ import person03 from './Testamonials/person03.jpg'
 import person04 from './Testamonials/person04.jpg'
 
 import photoA from './About/photoA.jpg'
-import photoB from './About/photoB.jpg'
+import photoB from './About/PhotoB.jpg'
 
 export { homeImage, Logo, LogoFooter, Bruchetta, GreekSalad, LemonDessert, person01, person02, person03, person04, photoA, photoB }
