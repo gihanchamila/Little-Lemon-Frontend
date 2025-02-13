@@ -23,7 +23,7 @@
     --color-secondary-3: #EDEFED; /* light grey */
     --color-secondary-4: #333333; /* dark grey */
 
-    --breakpoint-sm: 25.75rem;
+    --breakpoint-sm: 20rem;
     --breakpoint-2xl: 100rem;
     --breakpoint-3xl: 120rem;
 
@@ -84,7 +84,7 @@
 }
 
 .fieldInput {
-    @apply border-2 border-primary-1 rounded-lg p-4 accent-primary-1 h-full 
+    @apply border-2 border-primary-1 rounded-lg p-4 accent-primary-1 h-full sm:w-[316px] lg:w-auto 
 }
 
 .userField {
