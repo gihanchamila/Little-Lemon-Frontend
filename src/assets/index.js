@@ -7,7 +7,7 @@ import Bruchetta from './Specials/Bruchetta.svg'
 import GreekSalad from './Specials/GreekSalad.jpg'
 import LemonDessert from './Specials/LemonDessert.jpg'
 
-import person01 from './Testamonials/person01.jpg'
+import person01 from './Testamonials/Person01.jpg'
 import person02 from './Testamonials/person02.jpg'
 import person03 from './Testamonials/person03.jpg'
 import person04 from './Testamonials/person04.jpg'
