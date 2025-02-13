@@ -47,7 +47,7 @@ function App() {
       <Header />
       <Navigation />
       <Routes>
-        <Route path="/" element={<MainScreen />} />
+        <Route path="/Little-Lemon/" element={<MainScreen />} />
         <Route path="booking" element={<Booking availableTimes={state} dispatch={dispatch} submitForm={submitForm} />}/>
         <Route path="confirmed" element={<ConfirmBooking />} />
       </Routes>
