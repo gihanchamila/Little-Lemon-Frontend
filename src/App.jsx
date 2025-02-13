@@ -47,7 +47,7 @@ function App() {
       <Header />
       <Navigation />
       <Routes>
-        <Route path="home" element={<MainScreen />} />
+        <Route path="home-page" element={<MainScreen />} />
         <Route path="booking" element={<Booking availableTimes={state} dispatch={dispatch} submitForm={submitForm} />}/>
         <Route path="confirmed" element={<ConfirmBooking />} />
       </Routes>
