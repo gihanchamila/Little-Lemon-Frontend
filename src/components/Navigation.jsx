@@ -102,13 +102,13 @@ const Navigation = () => {
     if (link === 'home') {
       navigate('/');
     } else {
-      const section = document.getElementById(link);
+      const section = document.getElementById(link.replace('#', ''));
       if (section) {
-        const offset = window.innerWidth < 1024 ? -200 : -80; 
+        const offset = window.innerWidth < 1024 ? -980 : -80; 
         const yOffset = section.getBoundingClientRect().top + window.scrollY + offset;
         window.scrollTo({ top: yOffset, behavior: 'smooth' });
       } else {
-        window.location.hash = `${link}`;
+        window.location.hash = link;
       }
     }
   };
