@@ -40,7 +40,7 @@
 }
 
 .outline {
-    @apply border-2 rounded-lg text-secondary-3
+    @apply border-2 rounded-2xl text-secondary-3 px-6 text-sm font-extrabold
 }
 
 .navigationList {
