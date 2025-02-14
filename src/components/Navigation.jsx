@@ -48,7 +48,7 @@ const NavigationItems = ({closeMenu, handleNavigate}) => {
       {navigationLinks.map((link) => (
         <li key={link.id}>
           <ScrollLink 
-            to={link.link.replace("#", "")} 
+            to={link.link} 
             smooth={true} 
             duration={500} 
             offset={-980} 
@@ -91,8 +91,6 @@ const Navigation = () => {
     } else {
       document.body.classList.remove('no-scroll');
     }
-
-    // Cleanup function to remove the class when component unmounts
     return () => document.body.classList.remove('no-scroll');
   }, [open]);
 
@@ -101,10 +99,17 @@ const Navigation = () => {
   };
 
   const handleNavigate = (link) => {
-    if (link === "#home") {
-      navigate('/'); 
+    if (link === 'home') {
+      navigate('/');
     } else {
-      window.location.hash = link;
+      const section = document.getElementById(link);
+      if (section) {
+        const offset = window.innerWidth < 1024 ? -200 : -80; 
+        const yOffset = section.getBoundingClientRect().top + window.scrollY + offset;
+        window.scrollTo({ top: yOffset, behavior: 'smooth' });
+      } else {
+        window.location.hash = `${link}`;
+      }
     }
   };
 
@@ -114,7 +119,7 @@ const Navigation = () => {
     <nav role='navigation'  className="lg:grid lg:grid-cols-12 lg:gap-5 lg:px-24 lg:py-12 lg:pb-0 md:grid-cols-4 sm:grid sm:grid-cols-4 sm:gap-5 sm:px-12 sm:pt-12 sm:pb-0 items-center">
       <section className='lg:visible lg:grid grid-cols-12 col-start-1 col-end-13 sm:hidden items-center'>
         <LogoImage logo={Logo} />
-        <NavigationItems/>
+        <NavigationItems  closeMenu={closeMenu} handleNavigate={handleNavigate}  />
       </section>
       
       <section className='lg:hidden sm:visible col-start-1 col-end-5'>
@@ -122,7 +127,6 @@ const Navigation = () => {
           <LogoImage logo={Logo} />
           <button className='lg:hidden sm:visible'>
             {open ? <X color='#333333' onClick={() =>setOpen(!open)}/> : <Menu color='#333333' onClick={() =>setOpen(!open) } />}
-            
           </button>
         </div>
       </section>
