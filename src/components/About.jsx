@@ -24,7 +24,7 @@ const About = () => {
                         src={photoB}
                         alt="Owner's photo smiling outdoors"
                         role="img"
-                        className="sm:hidden lg:h-[275px] lg:w-[345px] sm:absolute sm:h-auto sm:top-0 sm:left-1/2 sm:transform sm:-translate-x-1/4 sm:translate-y-1/2 sm:object-cover sm:rounded-2xl"
+                        className="sm:hidden lg:block lg:h-[275px] lg:w-[345px] sm:w-[350px] sm:absolute sm:h-auto sm:top-0 sm:left-1/2 sm:transform sm:-translate-x-1/4 sm:translate-y-1/2 sm:object-cover sm:rounded-2xl"
                     />
                 </figure>
             </div>
