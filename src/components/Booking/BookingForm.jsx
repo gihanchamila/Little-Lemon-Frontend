@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Button from "../Button/Button";
 
@@ -21,6 +22,7 @@ const BookingForm = (props) => {
    const [date, setDate] = useState("");
    const [seating, setSeating] = useState("")
    const [times, setTimes] = useState("")
+   const navigate = useNavigate()
 
    const [formErrors, setFormErrors] = useState({})
 
@@ -59,6 +61,11 @@ const BookingForm = (props) => {
     setDate(e);
     props.dispatch({ type: "UPDATE_TIMES", date: e }); 
   };
+
+  const handleBack = () => {
+    navigate("/");
+  }
+
   
 
   return (
@@ -115,8 +122,9 @@ const BookingForm = (props) => {
               {formErrors.seating && <p className="formError font-bold">{formErrors.seating}</p>}
             </div>
           </fieldset>
-          <div className="lg:col-start-2 lg:col-end-13 lg:w-full lg:grid sm:col-start-2 sm:col-end-4 sm:pt-10 sm:flex sm:justify-end sm:w-[316px]"> 
-            <Button className="w-full">Make a reservation</Button>
+          <div className="lg:col-start-10 lg:col-end-13 lg:w-full  sm:col-start-2 sm:col-end-4 sm:pt-10 sm:flex sm:flex-col sm:justify-end sm:w-[316px] lg:flex-row  sm:space-y-4"> 
+            <Button onClick={handleBack} className={'sm:mr-0 lg:mb-0 lg:mr-5  lg:flex lg:justify-self-end'}>Back</Button>
+            <Button className="lg:flex lg:justify-self-end">Make a reservation</Button>
           </div>
         </form>
       </section>
