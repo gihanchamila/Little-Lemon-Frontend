@@ -26,19 +26,19 @@ const navigationLinks = [
   {
     id: 4,
     name: "Reservations",
-    link: "#reservations"
+    link: "reservations"
   },
 
   {
     id: 5,
     name: "Order Online",
-    link: "#order-online"
+    link: "order-online"
   },
 
   {
     id: 6,
     name: "Login",
-    link: "#login"
+    link: "login"
   }
 ];
 
@@ -99,19 +99,28 @@ const Navigation = () => {
   };
 
   const handleNavigate = (link) => {
-    if (link === 'home') {
-      navigate('/');
+    if (link === 'home' || link === 'order-online' || link === 'login') {
+      navigate('/'); // Navigate to home first
+      setTimeout(() => {
+        window.location.hash = ''; // Remove any hash fragment after navigation
+      }, 100); // Small delay to ensure navigation is completed
+    } else if (link === 'reservations') {
+      navigate('/booking');
     } else {
       const section = document.getElementById(link.replace('#', ''));
       if (section) {
-        const offset = window.innerWidth < 1024 ? -980 : -80; 
+        const offset = window.innerWidth < 1024 ? -980 : -80;
         const yOffset = section.getBoundingClientRect().top + window.scrollY + offset;
         window.scrollTo({ top: yOffset, behavior: 'smooth' });
       } else {
-        window.location.hash = link;
+        navigate('/'); // Ensure navigation to home first before scrolling
+        setTimeout(() => {
+          window.location.hash = link; // Then apply the hash fragment
+        }, 100);
       }
     }
   };
+  
 
 
   return (
