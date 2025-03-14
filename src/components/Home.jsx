@@ -35,7 +35,7 @@ const Home = () => {
 
       {/* Right Side (Image) */}
       <figure className="lg:col-span-7 lg:flex lg:justify-end lg:h-full sm:col-start-1 sm:col-span-full sm:h-full">
-        <img src={homeImage} alt="Restaurant food" className="lg:w-[320px] lg:h-[400px] sm:aspect-auto sm:w-[400px] sm:h-[350px] object-cover rounded-2xl" />
+        <img src={homeImage} loading="lazy" alt="Restaurant food" className="lg:w-[320px] lg:h-[400px] sm:aspect-auto sm:w-[400px] sm:h-[350px] object-cover rounded-2xl" />
       </figure>
     </main>
   );
