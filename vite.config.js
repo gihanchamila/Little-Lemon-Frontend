@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base:"/little-lemon-psi-eight.vercel.app/",
+  base:"/little-lemon-gnfavcmgj-gihanchamilas-projects.vercel.app/",
   plugins: [react(), tailwindcss()],
   test: {
     globals: true,
