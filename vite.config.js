@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base:"/Little-Lemon-Frontend/",
   plugins: [react(), tailwindcss()],
   test: {
     globals: true,
