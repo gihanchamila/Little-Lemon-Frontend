@@ -17,7 +17,7 @@ export const Field = ({labelText, id, value, onChange, type, checked, placeholde
 }
 
 
-const BookingForm = (props) => {
+const BookingForm = () => {
    // State for form fields
    const [occasion, setOccasion] = useState("");
    const [guests, setGuests] = useState("");
@@ -68,22 +68,6 @@ const BookingForm = (props) => {
         errorResponse(error);
       }
    }, []);
-
-   function toUTCISOStringLocal(dateStr, timeStr) {
-  const [year, month, day] = dateStr.split("-");
-  const [hours, minutes] = timeStr.split(":");
-
-  // Create date in local time
-  const localDate = new Date(Date.UTC(
-    parseInt(year),
-    parseInt(month) - 1,
-    parseInt(day),
-    parseInt(hours),
-    parseInt(minutes)
-  ));
-
-  return localDate.toISOString();  // Always in UTC ("Z")
-}
 
    useEffect(() => {
     fetchTimeSlots();

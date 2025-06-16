@@ -20,7 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainScreen />} />
         <Route path="login" element={<Login />} />
-        <Route path="booking" element={<Booking availableTimes={state} dispatch={dispatch} submitForm={submitForm} />}/>
+        <Route path="booking" element={<Booking/>}/>
         <Route path="confirmed" element={<ConfirmBooking />} />
         <Route path="signup" element={<SignUp />} />
       </Routes>
