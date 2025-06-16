@@ -32,8 +32,6 @@ const ConfirmBooking = () => {
     }
   }, [location.state]);
   
-  console.log(formData)
-
   return (
     <>
       <header className='lg:grid lg:grid-cols-12 lg:gap-5 lg:px-24  md:grid-cols-4 sm:grid sm:grid-cols-4 sm:gap-5 sm:px-12 sm:py-12'>

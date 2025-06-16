@@ -113,7 +113,6 @@ const BookingForm = (props) => {
     // B. Run validation
     const isValid = validateForm();
     if (!isValid) {
-      console.log("Form has errors, submission stopped.");
       return; // Stop the function if validation fails
     }
 
@@ -127,12 +126,7 @@ const BookingForm = (props) => {
   
 
   const selectedOccasionName = occasionsList.find(item => item.id === parseInt(occasion))?.name || "Unknown";
-  console.log(selectedOccasionName)
-  console.log(selectedTime)
-  console.log(occasion)
   const booking_datetime = `${date}T${selectedTime}:00`;
-
-  console.log(booking_datetime)
     // C. Create the data object from the current state
     const formData = {
         date,

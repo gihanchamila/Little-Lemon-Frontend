@@ -58,8 +58,6 @@ const UserDetailsForm = ({bookingDetails}) => {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    console.log("Formdata", formData)
-    console.log("In user details", formData.occasion)
 
     // Combine data from the previous form and this form
     const finalPayload = {
@@ -74,11 +72,9 @@ const UserDetailsForm = ({bookingDetails}) => {
 
     try {
       // Simulate sending the complete data to your backend
-      console.log("Submitting final payload:", finalPayload);
       const response = await axiosInstance.post('/api/bookings/', finalPayload);
 
       // On success, navigate to a confirmation page with the reservation details
-      console.log("Reservation successful:", response.data);
       navigate('/', { state: { confirmedBooking: response.data } });
 
     } catch (error) {
