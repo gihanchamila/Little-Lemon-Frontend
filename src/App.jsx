@@ -12,8 +12,7 @@ import ConfirmBooking from "./components/Booking/ConfirmBooking"
 import Login from "./components/Login"
 import SignUp from "./components/SignUp"
 
-function App() {
-
+function App() 
   return (
     <>
       <Header />
