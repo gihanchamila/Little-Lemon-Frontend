@@ -23,7 +23,6 @@ function App() {
     switch (action.type) {
       case "UPDATE_TIMES":
         return { availableTimes: fetchAPI(new Date(action.date)) };
-        
       case "BOOK_TIME":
         return {
           availableTimes: state.availableTimes.filter(time => time !== action.time),
