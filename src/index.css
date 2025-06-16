@@ -44,7 +44,7 @@
 }
 
 .navigationList {
-    @apply text-md font-karla font-bold text-secondary-4 uppercase hover:border-b-[3px] hover:border-secondary-4 focus:text-primary-2 focus:border-b-[3px] focus:border-primary-2 transition-all
+    @apply text-md font-karla font-bold text-secondary-4 uppercase  focus:text-primary-2 focus:border-b-[3px] focus:border-primary-2 transition-all
 }
 
 .title {
@@ -84,7 +84,7 @@
 }
 
 .fieldInput {
-    @apply border-2 border-primary-1 rounded-lg p-4 accent-primary-1 h-full sm:w-[316px] lg:w-auto 
+    @apply border-2 border-primary-1 rounded-lg p-4 accent-primary-1 h-full sm:w-[316px] lg:w-auto  lg:max-w-none;
 }
 
 .userField {

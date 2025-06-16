@@ -39,6 +39,12 @@ const navigationLinks = [
     id: 6,
     name: "Login",
     link: "login"
+  },
+
+  {
+    id: 7,
+    name: "signup",
+    link: "signup"
   }
 ];
 
@@ -99,11 +105,15 @@ const Navigation = () => {
   };
 
   const handleNavigate = (link) => {
-    if (link === 'home' || link === 'order-online' || link === 'login') {
+    if (link === 'home' || link === 'order-online') {
       navigate('/'); // Navigate to home first
       setTimeout(() => {
         window.location.hash = ''; // Remove any hash fragment after navigation
       }, 100); // Small delay to ensure navigation is completed
+    } else if (link === 'login'){
+      navigate('/login')
+    } else if (link === 'signup'){
+      navigate('/signup')
     } else if (link === 'reservations') {
       navigate('/booking');
     } else {

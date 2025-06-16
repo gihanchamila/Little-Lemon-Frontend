@@ -1,42 +1,103 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Button from "../Button/Button";
+import { errorResponse } from "../../utils/errorResponse";
+import { Asterisk } from "lucide-react";
+import axiosInstance from "../../api/axiosInstance";
 
-import { Star, StarIcon, Asterisk } from "lucide-react";
-
+// Your Field component remains the same
 export const Field = ({labelText, id, value, onChange, type, checked, placeholder, formErrors, ...props }) => {
-
   return (
     <field className="field">
         <label htmlFor={id} className="pb-2 relative">{labelText}<Asterisk size={12} color={"#fb2c36"} className="absolute top-1 left-28" /></label>
         <input className="fieldInput" id={id} value={value} name={id} onChange={onChange} type={type}/>
-    </field> 
+    </field>
   )
 }
 
-const BookingForm = (props) => {
 
+const BookingForm = (props) => {
+   // State for form fields
    const [occasion, setOccasion] = useState("");
    const [guests, setGuests] = useState("");
    const [date, setDate] = useState("");
-   const [seating, setSeating] = useState("")
-   const [times, setTimes] = useState("")
-   const navigate = useNavigate()
+   const [seating, setSeating] = useState("");
+   const [occasionsList, setOccasionsList] = useState([]);
+   const [seatingTypesList, setSeatingTypesList] = useState([]);
+   
+   // --- MODIFIED STATE ---
+   // State to hold the array of time slot objects from the API
+   const [availableTimes, setAvailableTimes] = useState([]); 
+   // State to hold the user's selected time (label)
+   const [selectedTime, setSelectedTime] = useState(""); 
 
-   const [formErrors, setFormErrors] = useState({})
+   const [formErrors, setFormErrors] = useState({});
+   const navigate = useNavigate();
 
-   const { availableTimes } = props;
+   // --- MODIFIED DATA FETCHING ---
+   const fetchTimeSlots = useCallback(async () => {
+      try {
+        const response = await axiosInstance.get("/api/time-slots/");
+        const timeSlots = response.data.results; // Directly access the 'results' array
+        setAvailableTimes(timeSlots); // Set the array of objects to state
+      } catch (error) {
+        errorResponse(error);
+      }
+    }, []);
 
    useEffect(() => {
-    console.log("Updated availableTimes in Booking:", availableTimes);
-  }, [availableTimes]);
+    fetchTimeSlots();
+   }, [fetchTimeSlots]);
 
+   const fetchOccasions = useCallback(async() => {
+      try {
+        const response = await axiosInstance.get("/api/occasions/");
+        const data = response.data.results;
+        setOccasionsList(data);
+      } catch(error) {
+        errorResponse(error);
+      }
+   }, []);
+
+    const fetchSeatingTypes = useCallback(async () => {
+      try {
+        const response = await axiosInstance.get("/api/seating-types/");
+        setSeatingTypesList(response.data.results);
+      } catch (error) {
+        errorResponse(error);
+      }
+   }, []);
+
+   function toUTCISOStringLocal(dateStr, timeStr) {
+  const [year, month, day] = dateStr.split("-");
+  const [hours, minutes] = timeStr.split(":");
+
+  // Create date in local time
+  const localDate = new Date(Date.UTC(
+    parseInt(year),
+    parseInt(month) - 1,
+    parseInt(day),
+    parseInt(hours),
+    parseInt(minutes)
+  ));
+
+  return localDate.toISOString();  // Always in UTC ("Z")
+}
+
+   useEffect(() => {
+    fetchTimeSlots();
+    fetchOccasions();
+    fetchSeatingTypes(); 
+   }, [fetchTimeSlots, fetchOccasions, fetchSeatingTypes]);
+
+   
+   // --- MODIFIED VALIDATION ---
    const validateForm = () => {
     let errors = {};
 
     if (!date) errors.date = "Please select a date.";
-    if (!times) errors.times = "Please choose a time.";
+    if (!selectedTime) errors.time = "Please choose a time."; // Check selectedTime
     if (!guests || guests < 1 || guests > 10) errors.guests = "Guests must be between 1 and 10.";
     if (!occasion) errors.occasion = "Please select an occasion.";
     if (!seating) errors.seating = "Please select a seating option.";
@@ -45,28 +106,56 @@ const BookingForm = (props) => {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+     const handleSubmit = (e) => {
+    // A. Prevent the browser's default form submission behavior
     e.preventDefault();
-    const isValid = validateForm(); // Ensure validation is checked first
-    if (!isValid) {
-      console.log("Form contains errors:", formErrors); // Debugging
-      return; // Stop form submission
 
+    // B. Run validation
+    const isValid = validateForm();
+    if (!isValid) {
+      console.log("Form has errors, submission stopped.");
+      return; // Stop the function if validation fails
     }
-    const formData = { date, times, guests, seating, occasion };
-    props.submitForm(formData);
+
+    if (!date || !selectedTime) {
+    setFormErrors({
+      date: !date ? "Date is required" : undefined,
+      time: !selectedTime ? "Time is required" : undefined,
+    });
+    return;
+  }
+  
+
+  const selectedOccasionName = occasionsList.find(item => item.id === parseInt(occasion))?.name || "Unknown";
+  console.log(selectedOccasionName)
+  console.log(selectedTime)
+  console.log(occasion)
+  const booking_datetime = `${date}T${selectedTime}:00`;
+
+  console.log(booking_datetime)
+    // C. Create the data object from the current state
+    const formData = {
+        date,
+        selectedTime,
+        booking_datetime,
+        guests,
+        seating,
+        occasion,
+        selectedOccasionName,
+    };
+
+    // D. Navigate to the confirmation page, passing the data in the state
+    localStorage.setItem("formData", JSON.stringify(formData));
+    navigate('/confirmed', { state: { bookingData: formData } });
   };
 
-   const handleChange = (e) => {
+  const handleChange = (e) => {
     setDate(e);
-    props.dispatch({ type: "UPDATE_TIMES", date: e }); 
   };
 
   const handleBack = () => {
     navigate("/");
-  }
-
-  
+  };
 
   return (
     <header>
@@ -77,52 +166,72 @@ const BookingForm = (props) => {
                 <div className="field">
                     <label htmlFor="book-date" className="pb-2 relative">Choose Date <Asterisk size={12} color={"#fb2c36"} className="absolute top-1 left-28" /></label>
                     <input className="fieldInput" id="book-date" value={date} onChange={(e) => handleChange(e.target.value)} type="date"/>
-                    {/* <Field labelText={"Choose Date"} id={"book-date"} value={date} onChange={(e) => handleChange(e.target.value)} type="date" /> */}
                     {formErrors.date && <p className="text-red-500 text-sm">{formErrors.date}</p>}
                 </div>
+                {/* --- MODIFIED DROPDOWN --- */}
                 <div className="field">
                     <label htmlFor="book-time" className="pb-2 relative">Choose Time <Asterisk size={12} color={"#fb2c36"} className="absolute top-1 left-28" /></label>
-                    <select className="fieldInput" id="book-time" value={times} onChange={(e) => setTimes(e.target.value)}>
+                    <select
+                        className="fieldInput"
+                        id="book-time"
+                        value={selectedTime}
+                        onChange={(e) => setSelectedTime(e.target.value)}
+                    >
                         <option value="">Select a Time</option>
-                    {props.availableTimes.availableTimes.map(availableTimes => {return <option key={availableTimes}>{availableTimes}</option>})}
+                        {availableTimes.map(slot => (
+                            <option key={slot.id} value={slot.start_time}>
+                               {slot.label}
+                            </option>
+                        ))}
                     </select>
-                    {formErrors.times && <p className="text-red-500 text-sm">{formErrors.times}</p>}
+                    {/* Update error key to 'time' */}
+                    {formErrors.time && <p className="text-red-500 text-sm">{formErrors.time}</p>}
                 </div>
             </div>
             <div className="lg:justify-between lg:flex-row sm:flex sm:flex-col sm:space-y-2 lg:space-y-0">
                 <div className="field">
                     <label htmlFor="book-guests" className="pb-2 relative">Number of Guests<Asterisk size={12} color={"#fb2c36"} className="absolute top-1 left-40" /></label>
-                    <input className="fieldInput" id="book-guests" min="1" value={guests} onChange={(e) => {setGuests(e.target.value)}} type={"number"} placeholder={0} max={10}></input>
+                    <input className="fieldInput" id="book-guests" min="1" value={guests} onChange={(e) => {setGuests(e.target.value)}} type={"number"} placeholder={"0"} max={10}></input>
                     {formErrors.guests && <p className="text-red-500 text-sm">{formErrors.guests}</p>}
                 </div>
                 <div className="field">
                     <label htmlFor="book-occasion" className="pb-2 relative">Occasion <Asterisk size={12} color={"#fb2c36"} className="absolute top-1 left-21" /></label>
-                    <select className="fieldInput" id="book-occasion" key={occasion} value={occasion} onChange={(e) => setOccasion(e.target.value)}>
+                    <select
+                        className="fieldInput"
+                        id="book-occasion"
+                        value={occasion} // Controlled by the 'occasion' state
+                        onChange={(e) => setOccasion(e.target.value)}
+                    >
                         <option value="">Select an Option</option>
-                        <option>Birthday</option>
-                        <option>Anniversary</option>
+                        {/* Map over the fetched occasionsList */}
+                        {occasionsList.map(item => (
+                            <option key={item.id} value={item.id}>
+                                {item.name}
+                            </option>
+                        ))}
                     </select>
                     {formErrors.occasion && <p className="text-red-500 text-sm">{formErrors.occasion}</p>}
                 </div>
             </div>
-            <div className="sm:flex lg:flex-col sm:flex-col">
-              <div className="sm:flex sm:flex-col lg:flex-row lg:items-center lg:justify-start lg:pt-5 sm:pt-5">
-                  <p className="text-sm font-extrabold text-primary-1 font-karla mr-10 relative sm:mb-2 lg:mb-0">Seating type<Asterisk size={12} color={"#fb2c36"} className="absolute top-0 left-[115px]" /></p>
-                  <div className="sm:flex sm:flex-col lg:flex-row sm:space-x-4">
-                    <div className="flex flex-row text-primary-1 text-sm font-karla font-extrabold w-[100px] space-x-2 items-center sm:justify-between">
-                        <label htmlFor="indoor" className="relative">Indoor</label>
-                        <input className="lg:fieldInput ml-2" id="indoor" value="Indoor" checked={seating === "Indoor"}  onChange={(e) => setSeating(e.target.value)} type="radio" ></input>
-                    </div>
-                    <div className="flex sm:flex-row text-primary-1 text-sm font-karla font-extrabold w-[100px] space-x-2 items-center sm:justify-between">
-                        <label htmlFor="outdoor" className="relative">Outdoor</label>
-                        <input className="lg:fieldInput ml-2" id="outdoor"  value="Outdoor" checked={seating === "Outdoor"}  onChange={(e) => setSeating(e.target.value)} type="radio"></input>
-                    </div>
-                  </div> 
-              </div>
-              {formErrors.seating && <p className="formError font-bold">{formErrors.seating}</p>}
+            <div className="field pt-3">
+                <label htmlFor="book-seating" className="pb-2 relative">Seating Type <Asterisk size={12} color={"#fb2c36"} className="absolute top-1 left-28" /></label>
+                <select
+                    className="fieldInput"
+                    id="book-seating"
+                    value={seating}
+                    onChange={(e) => setSeating(e.target.value)}
+                >
+                    <option value="">Select a Seating Type</option>
+                    {seatingTypesList.map(type => (
+                        <option key={type.id} value={type.id}>
+                            {type.name}
+                        </option>
+                    ))}
+                </select>
+                {formErrors.seating && <p className="text-red-500 text-sm">{formErrors.seating}</p>}
             </div>
           </fieldset>
-          <div className="lg:col-start-10 lg:col-end-13 lg:w-full  sm:col-start-2 sm:col-end-4 sm:pt-10 sm:flex sm:flex-col sm:justify-end sm:w-[316px] lg:flex-row  sm:space-y-4"> 
+          <div className="lg:col-start-10 lg:col-end-13 lg:w-full  sm:col-start-2 sm:col-end-4 sm:pt-10 sm:flex sm:flex-col sm:justify-end sm:w-[316px] lg:flex-row  sm:space-y-4">
             <Button onClick={handleBack} className={'sm:mr-0 lg:mb-0 lg:mr-5  lg:flex lg:justify-self-end'}>Back</Button>
             <Button className="lg:flex lg:justify-self-end">Make a reservation</Button>
           </div>

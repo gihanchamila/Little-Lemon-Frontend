@@ -9,6 +9,8 @@ import Navigation from "../src/components/Navigation"
 
 import Booking from "./components/Booking/Booking"
 import ConfirmBooking from "./components/Booking/ConfirmBooking"
+import Login from "./components/Login"
+import SignUp from "./components/SignUp"
 
 function App() {
 
@@ -48,8 +50,10 @@ function App() {
       <Navigation />
       <Routes>
         <Route path="/" element={<MainScreen />} />
+        <Route path="login" element={<Login />} />
         <Route path="booking" element={<Booking availableTimes={state} dispatch={dispatch} submitForm={submitForm} />}/>
         <Route path="confirmed" element={<ConfirmBooking />} />
+        <Route path="signup" element={<SignUp />} />
       </Routes>
       <Footer />
     </>
