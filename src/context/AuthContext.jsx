@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import axiosInstance from '../api/axiosInstance';
 import { useNavigate } from 'react-router-dom';
+import { errorResponse } from '../utils/errorResponse';
 
 const AuthContext = createContext();
 
@@ -42,9 +43,9 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('user', JSON.stringify(userData));
       navigate("/")
       return true;
-
     } catch (error) {
       console.error('Login failed:', error);
+      errorResponse(error)
       return false;
     }
   };

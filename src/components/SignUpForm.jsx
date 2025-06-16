@@ -38,8 +38,9 @@ export default function SignUpForm() {
       const response = await axiosInstance.post("/auth/users/", signupPayload);
       const data = response.data;
       console.log("Signup successful:", data);
-      navigate("/");
+      navigate("/login");
     } catch (error) {
+      console.log(error)
       errorResponse(error)
     }
   };
