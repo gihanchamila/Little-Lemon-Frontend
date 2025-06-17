@@ -67,7 +67,9 @@ const UserDetailsForm = ({bookingDetails}) => {
       seating_type_id: bookingDetails.seating,
       occasion_id: bookingDetails.occasion,
       special_request: formData.specialRequest,
-      formData
+      first_name :formData.firstName,
+      last_name : formData.lastName,
+      email :formData.email
     };
 
     try {

@@ -35,6 +35,43 @@ const BookingForm = () => {
    const [formErrors, setFormErrors] = useState({});
    const navigate = useNavigate();
 
+   useEffect(() => {
+    const checkAvailability = async () => {
+      if (!date || !selectedTime || !guests || !seating) return;
+
+      const booking_datetime = `${date}T${selectedTime}:00`;
+
+      try {
+        const res = await axiosInstance.post("/api/check-availability/", {
+          booking_datetime : booking_datetime,
+          number_of_guests : guests,
+          seating_type_id : seating,
+        });
+
+        if (!res.data.available) {
+          setFormErrors(prev => ({
+            ...prev,
+            time: res.data.detail || "Time slot not available",
+          }));
+        } else {
+          setFormErrors(prev => {
+            const newErrors = { ...prev };
+            delete newErrors.time;
+            return newErrors;
+          });
+        }
+      } catch (error) {
+        console.error(error);
+        setFormErrors(prev => ({
+          ...prev,
+          time: "Something went wrong checking availability.",
+        }));
+      }
+    };
+
+    checkAvailability();
+  }, [date, selectedTime, guests, seating]);
+
    // --- MODIFIED DATA FETCHING ---
    const fetchTimeSlots = useCallback(async () => {
       try {
@@ -45,10 +82,6 @@ const BookingForm = () => {
         errorResponse(error);
       }
     }, []);
-
-   useEffect(() => {
-    fetchTimeSlots();
-   }, [fetchTimeSlots]);
 
    const fetchOccasions = useCallback(async() => {
       try {
