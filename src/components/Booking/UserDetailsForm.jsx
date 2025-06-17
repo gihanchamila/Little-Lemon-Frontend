@@ -4,6 +4,7 @@ import Button from '../Button/Button';
 import { useAuth } from '../../context/AuthContext'
 import axiosInstance from '../../api/axiosInstance';
 import { errorResponse } from '../../utils/errorResponse';
+import { generatePDF } from '../../utils/pdfGenerator';
 
 
 import { Asterisk } from 'lucide-react';
@@ -73,21 +74,18 @@ const UserDetailsForm = ({bookingDetails}) => {
     };
 
     try {
-      // Simulate sending the complete data to your backend
       const response = await axiosInstance.post('/api/bookings/', finalPayload);
-
-      // On success, navigate to a confirmation page with the reservation details
+      generatePDF(finalPayload)
       navigate('/', { state: { confirmedBooking: response.data } });
 
     } catch (error) {
       errorResponse(error);
-      // Optionally, set a general form error to display to the user
       setFormErrors(prev => ({ ...prev, api: "Could not complete your reservation. Please try again." }));
     } finally {
       setIsSubmitting(false);
     }
   };
-    
+
   return (
     <form action="" onSubmit={handleSubmit} className='gridLayout p-0 bg-primary-1 mb-5'>
     <div className='lg:col-start-2 lg:col-end-12  lg:space-y-6 sm:col-start-1 sm:col-end-5 sm:space-y-2'>
@@ -140,7 +138,7 @@ const UserDetailsForm = ({bookingDetails}) => {
         </div>
         <div className='flex flex-row justify-end space-x-4 sm:mt-5 lg:mt-0'>
             <Button onClick={handleBack} outline className={'flex justify-self-end bg-secondary-3'}>Back</Button>
-            <Button className={'flex justify-self-end'} type="primary">Reserve table</Button>
+            <Button className={'flex justify-self-end'} onClick={handleSubmit} type="primary">Reserve table</Button>
         </div>
        
     </div>
