@@ -75,7 +75,7 @@ const UserDetailsForm = ({bookingDetails}) => {
 
     try {
       const response = await axiosInstance.post('/api/bookings/', finalPayload);
-      generatePDF({...finalPayload, occasion : bookingDetails.selectedOccasionName})
+      generatePDF({...finalPayload, occasion : bookingDetails.selectedOccasionName, seatingName: bookingDetails.selectedSeating.name, total_price : bookingDetails.price})
       navigate('/', { state: { confirmedBooking: response.data } });
 
     } catch (error) {

@@ -158,6 +158,8 @@ const BookingForm = () => {
   
 
   const selectedOccasionName = occasionsList.find(item => item.id === parseInt(occasion))?.name || "Unknown";
+  const selectedSeating = seatingTypesList.find(item => item.id === parseInt(seating)) || {};
+  const price = parseFloat(totalPrice).toFixed(2)
   const booking_datetime = `${date}T${selectedTime}:00`;
     // C. Create the data object from the current state
     const formData = {
@@ -168,6 +170,8 @@ const BookingForm = () => {
         seating,
         occasion,
         selectedOccasionName,
+        selectedSeating,
+        price
     };
 
     // D. Navigate to the confirmation page, passing the data in the state
