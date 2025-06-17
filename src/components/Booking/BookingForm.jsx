@@ -31,22 +31,35 @@ const BookingForm = () => {
    const [availableTimes, setAvailableTimes] = useState([]); 
    // State to hold the user's selected time (label)
    const [selectedTime, setSelectedTime] = useState(""); 
+   const [totalPrice, setTotalPrice] = useState("")
 
    const [formErrors, setFormErrors] = useState({});
    const navigate = useNavigate();
 
-   useEffect(() => {
-    const checkAvailability = async () => {
-      if (!date || !selectedTime || !guests || !seating) return;
+  useEffect(() => {
+    const booking_datetime = `${date}T${selectedTime}:00`;
 
-      const booking_datetime = `${date}T${selectedTime}:00`;
+    if (!date || !selectedTime || !guests || !seating) return;
 
+    const payload = {
+      number_of_guests: guests,
+      booking_datetime,
+      seating_type_id: seating,
+    };
+
+    const fetchTotalPrice = async () => {
       try {
-        const res = await axiosInstance.post("/api/check-availability/", {
-          booking_datetime : booking_datetime,
-          number_of_guests : guests,
-          seating_type_id : seating,
-        });
+        const res = await axiosInstance.post("/api/get-price/", payload);
+        setTotalPrice(res.data.total_price);
+      } catch (error) {
+        console.error("Error fetching total price:", error);
+        setTotalPrice(null);
+      }
+    };
+
+    const checkAvailability = async () => {
+      try {
+        const res = await axiosInstance.post("/api/check-availability/", payload);
 
         if (!res.data.available) {
           setFormErrors(prev => ({
@@ -61,7 +74,7 @@ const BookingForm = () => {
           });
         }
       } catch (error) {
-        console.error(error);
+        console.error("Error checking availability:", error);
         setFormErrors(prev => ({
           ...prev,
           time: "Something went wrong checking availability.",
@@ -69,8 +82,10 @@ const BookingForm = () => {
       }
     };
 
+    fetchTotalPrice();
     checkAvailability();
   }, [date, selectedTime, guests, seating]);
+  
 
    // --- MODIFIED DATA FETCHING ---
    const fetchTimeSlots = useCallback(async () => {
@@ -224,7 +239,10 @@ const BookingForm = () => {
                     {formErrors.occasion && <p className="text-red-500 text-sm">{formErrors.occasion}</p>}
                 </div>
             </div>
-            <div className="field pt-3">
+            
+
+            <div className="lg:justify-between lg:flex-row sm:flex sm:flex-col sm:space-y-2 lg:space-y-0">
+               <div className="field">
                 <label htmlFor="book-seating" className="pb-2 relative">Seating Type <Asterisk size={12} color={"#fb2c36"} className="absolute top-1 left-28" /></label>
                 <select
                     className="fieldInput"
@@ -240,8 +258,19 @@ const BookingForm = () => {
                     ))}
                 </select>
                 {formErrors.seating && <p className="text-red-500 text-sm">{formErrors.seating}</p>}
+              </div>
+              <div>
+                {totalPrice !== null && (
+                  <div className="field">
+                    <label className="text-right">Total Price</label>
+                    <p className="font-semibold text-[2em] text-right">${parseFloat(totalPrice).toFixed(2) | 0.00}</p>
+                  </div>
+                )}
+              </div>
+                
             </div>
           </fieldset>
+                      
           <div className="lg:col-start-10 lg:col-end-13 lg:w-full  sm:col-start-2 sm:col-end-4 sm:pt-10 sm:flex sm:flex-col sm:justify-end sm:w-[316px] lg:flex-row  sm:space-y-4">
             <Button onClick={handleBack} className={'sm:mr-0 lg:mb-0 lg:mr-5  lg:flex lg:justify-self-end'}>Back</Button>
             <Button className="lg:flex lg:justify-self-end">Make a reservation</Button>
