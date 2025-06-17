@@ -1,4 +1,5 @@
 import jsPDF from "jspdf";
+import { date } from "yup";
 
 /**
  * Generates a beautifully formatted PDF reservation bill.
@@ -13,35 +14,34 @@ import jsPDF from "jspdf";
  * @param {string} data.last_name
  * @param {string} data.email
  * @param {number|string} data.total_price
- * @param {Array} data.occasionsList - List of occasions from API
- * @param {Array} data.seatingTypesList - List of seating types from API
+ * @param {string} data.occasion
  */
 export const generatePDF = ({
   booking_datetime,
   number_of_guests,
-  seating_type_id,
-  occasion_id,
   special_request,
   first_name,
   last_name,
   email,
   total_price,
-  occasionsList = [],
-  seatingTypesList = [],
+  occasion,
 }) => {
   const doc = new jsPDF();
+    console.log(occasion)
 
-  // Format readable date and time
-  const dateObj = new Date(booking_datetime);
-  const formattedDate = dateObj.toLocaleDateString();
-  const formattedTime = dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const getDate = (datetime) => {
+        const splitDate = datetime.split("T");
+        let time = splitDate[1].replace("Z", ""); // e.g. "18:00:00"
+        // Remove the trailing ":00" seconds part
+        time = time.endsWith(":00") ? time.slice(0, -3) : time;
+        
+        return {
+            date: splitDate[0],
+            time: time
+        };
+    };
 
-  // Get names from lists
-  const selectedOccasionName =
-    occasionsList.find(item => item.id === parseInt(occasion_id))?.name || "Unknown";
-
-  const selectedSeatingName =
-    seatingTypesList.find(item => item.id === parseInt(seating_type_id))?.name || "Unknown";
+    const { date, time } = getDate(booking_datetime);
 
   // Header
   doc.setFontSize(22);
@@ -60,11 +60,11 @@ export const generatePDF = ({
 
   // Reservation Info
   doc.text("Reservation Details", 20, 65);
-  doc.text(`Date: ${formattedDate}`, 20, 75);
-  doc.text(`Time: ${formattedTime}`, 20, 82);
+  doc.text(`Date: ${date}`, 20, 75);
+  doc.text(`Time: ${time}`, 20, 82);
   doc.text(`Guests: ${number_of_guests}`, 20, 89);
-  doc.text(`Occasion: ${selectedOccasionName}`, 20, 96);
-  doc.text(`Seating: ${selectedSeatingName}`, 20, 103);
+  doc.text(`Occasion: ${occasion}`, 20, 96);
+
   if (special_request) {
     doc.text("Special Request:", 20, 110);
     doc.setFont("helvetica", "italic");
