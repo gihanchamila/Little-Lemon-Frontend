@@ -187,10 +187,17 @@ const BookingForm = () => {
     navigate("/");
   };
 
+  const handleClick = () => {
+    navigate("/my-booking")
+  }
+
   return (
     <header>
       <section className="gridLayout">
         <form onSubmit={handleSubmit} className="lg:col-start-2 lg:col-end-12 sm:col-start-1 sm:col-end-5 sm:col-span-4">
+          <h2 onClick={handleClick} className="text-secondary-4 text-sm bg-secondary-3 px-4 py-2 rounded-full font-karla pb-2 font-medium mb-5 inline-block">
+              View Recent Bookings
+          </h2>
           <fieldset className="flex flex-col space-y-2">
             <div className="lg:flex lg:flex-row lg:justify-between sm:flex sm:flex-col lg:space-y-0 sm:space-y-2">
                 <div className="field">

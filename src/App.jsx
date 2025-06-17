@@ -11,6 +11,7 @@ import Booking from "./components/Booking/Booking"
 import ConfirmBooking from "./components/Booking/ConfirmBooking"
 import Login from "./components/Login"
 import SignUp from "./components/SignUp"
+import MyBooking from "./components/Booking/MyBooking"
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="booking" element={<Booking/>}/>
         <Route path="confirmed" element={<ConfirmBooking />} />
         <Route path="signup" element={<SignUp />} />
+        <Route path="my-booking" element={<MyBooking />} />
       </Routes>
       <Footer />
     </>
