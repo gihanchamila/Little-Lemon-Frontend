@@ -135,13 +135,13 @@ const MyBooking = () => {
                                                 
                                                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                     <div className="flex justify-end items-center space-x-4" title={tooltipMessage}>
-                                                        <button
+                                                        {/* <button
                                                             onClick={() => handleUpdate(booking.id)}
                                                             className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:text-gray-400 disabled:cursor-not-allowed"
                                                             disabled={isActionDisabled}
                                                         >
                                                             Update
-                                                        </button>
+                                                        </button> */}
                                                         <button
                                                             onClick={() => handleDelete(booking.id)}
                                                             className="text-red-600 hover:text-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:text-gray-400 disabled:cursor-not-allowed"
